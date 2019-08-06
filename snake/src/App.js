@@ -1,36 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Fragment}from 'react';
 import './App.scss';
 import {shallowEquals,arrayDiff,GridCell}  from './helpers/utility'
-// utility functions
-// function shallowEquals(arr1, arr2) {
-//   if (!arr1 || !arr2 || arr1.length !== arr2.length) return false;
-//   let equals = true;
-//   for (var i = 0; i < arr1.length; i++) {
-//     if (arr1[i] !== arr2[i]) equals = false;
-//   }
-//   return equals;
-// }
 
-// function arrayDiff(arr1, arr2){
-//   return arr1.map((a, i)=>{ 
-//     return a - arr2[i]
-//   })
-// }
-
-// // display a single cell
-// function GridCell(props) {
-//   const classes = `grid-cell 
-// ${props.foodCell ? "grid-cell--food" : ""} 
-// ${props.snakeCell ? "grid-cell--snake" : ""}
-// `;
-//   return (
-//     <div
-//       className={classes}
-//       style={{ height: props.size + "px", width: props.size + "px" }}
-//       />
-//   );
-// }
 
 // the main view
 class App extends React.Component {
@@ -95,6 +66,8 @@ class App extends React.Component {
       case 37:
         newSnake[0] = [this.state.snake[0][0] - 1, this.state.snake[0][1]];
         break;
+      default:
+        newSnake[0] = [this.state.snake[0][0] + 1, this.state.snake[0][1]];
                                 }
     // now shift each "body" segment to the previous segment's position
     [].push.apply(
@@ -110,6 +83,8 @@ class App extends React.Component {
     this.setState({ snake: newSnake });
 
     this.checkIfAteFood(newSnake);
+    
+    
     if (!this.isValid(newSnake[0]) || !this.doesntOverlap(newSnake)) {
       // end the game
       this.endGame()
@@ -150,12 +125,17 @@ class App extends React.Component {
   
   // is the cell's position inside the grid?
   isValid(cell) {
-    return (
-      cell[0] > -1 &&
-      cell[1] > -1 &&
-      cell[0] < this.numCells &&
-      cell[1] < this.numCells
-    );
+    try {
+      
+      return (
+        cell[0] > -1 &&
+        cell[1] > -1 &&
+        cell[0] < this.numCells &&
+        cell[1] < this.numCells
+      );
+    } catch (error) {
+      // return false;
+    }
   }
 
   doesntOverlap(snake) {
@@ -235,6 +215,8 @@ class App extends React.Component {
       );
     }
     return (
+      <Fragment>
+        <div className="mb-1">Your score: {this.state.snake.length} </div>
       <div
         className="snake-app"
         onKeyDown={this.setDirection}
@@ -256,6 +238,7 @@ class App extends React.Component {
           {cells}
         </div>
       </div>
+      </Fragment>
     );
   }
 }
