@@ -16,7 +16,7 @@ class App extends React.Component {
       direction: 39
     };
 
-    this.moveFood = this.moveFood.bind(this);
+    this.randomFood = this.randomFood.bind(this);
     this.checkIfAteFood = this.checkIfAteFood.bind(this);
     this.startGame = this.startGame.bind(this);
     this.endGame = this.endGame.bind(this);
@@ -26,12 +26,14 @@ class App extends React.Component {
     this.removeTimers = this.removeTimers.bind(this);
   }
   // randomly place snake food
-  moveFood() {
-    if (this.moveFoodTimeout) clearTimeout(this.moveFoodTimeout)
+  randomFood() {
+    if (this.randomFoodTimeout) clearTimeout(this.randomFoodTimeout)
     const x = parseInt(Math.random() * this.numCells);
+    
     const y = parseInt(Math.random() * this.numCells);
     this.setState({ food: [x, y] });
-    this.moveFoodTimeout = setTimeout(this.moveFood, 5000)
+    this.randomFoodTimeout = setTimeout(this.randomFood, 5000)
+    
   }
 
   setDirection({ keyCode }) {
@@ -120,7 +122,7 @@ class App extends React.Component {
         snake: newSnake.concat([newSnakeSegment]),
         food: []
       });
-    this.moveFood();
+    this.randomFood();
   }
   
   // is the cell's position inside the grid?
@@ -149,7 +151,7 @@ class App extends React.Component {
   startGame() {
     this.removeTimers();
     this.moveSnakeInterval = setInterval(this.moveSnake, 130);
-    this.moveFood();
+    this.randomFood();
 
     this.setState({
       status: 1,
@@ -169,7 +171,7 @@ class App extends React.Component {
 
   removeTimers() {
     if (this.moveSnakeInterval) clearInterval(this.moveSnakeInterval);
-    if (this.moveFoodTimeout) clearTimeout(this.moveFoodTimeout)
+    if (this.randomFoodTimeout) clearTimeout(this.randomFoodTimeout)
   }
 
   componentWillUnmount() {

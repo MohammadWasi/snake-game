@@ -19,8 +19,8 @@ html, body {
 }
 
 .grid-cell {
-  border-left: 1px solid #B25719;
-  border-bottom: 1px solid #B25719;
+  // border-left: 1px solid #B25719;
+  // border-bottom: 1px solid #B25719;
   background-color: #A3E261;
 }
 
@@ -70,7 +70,6 @@ button {
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url(image/apple.png)
-    // background-image: url(https://styles.redditmedia.com/t5_2zldd/styles/communityIcon_12zd9qt7we121.jpg);
 }
 .grid-cell--snake {
  background-color: #E23D3D;
