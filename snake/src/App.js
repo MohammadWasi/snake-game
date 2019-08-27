@@ -165,7 +165,8 @@ class App extends React.Component {
   endGame(){
     this.removeTimers();
     this.setState({
-      status : 2
+      status : 2,
+      direction: 39
     })
   }
 
