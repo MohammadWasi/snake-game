@@ -180,7 +180,7 @@ class App extends React.Component {
   }
 
   render() {
-    // each cell should be approximately 15px wide, so calculate how many we need
+    
     this.numCells = Math.floor(this.props.size / 15);
     const cellSize = this.props.size / this.numCells;
     const cellIndexes = Array.from(Array(this.numCells).keys());
@@ -212,14 +212,14 @@ class App extends React.Component {
       overlay = (
         <div className="snake-app__overlay">
           <div className="mb-1"><b>GAME OVER!</b></div>
-          <div className="mb-1">Your score: {this.state.snake.length} </div>
-          <button onClick={this.startGame}>Start a new game</button>
+          <div className="mb-1">Score: {this.state.snake.length} </div>
+          <button onClick={this.startGame}>Play a new game</button>
         </div>
       );
     }
     return (
       <Fragment>
-        <div className="mb-1">Your score: {this.state.snake.length} </div>
+        <div className="mb-1">Score: {this.state.snake.length} </div>
       <div
         className="snake-app"
         onKeyDown={this.setDirection}
